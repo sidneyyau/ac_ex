@@ -786,6 +786,14 @@ function checkLevel(flight, traffic, traffic_flas) {
 	if (!(fix in fatal)) 
 		fatal[fix] = [];
 
+	if (fix === "EPKAL" && fix === "DOSUT" && !flas[traffic_dir[traffic_flas]].includes(flight.fl)){
+		if (flight.fl_light === "bg-warning"){
+			return true;
+		}
+		fatal[fix].push(flight.acid + " level incorrect");
+		return false;
+	} 
+
 	if (level[traffic].includes(flight.fl)){
 		if (flight.fl_light === ""){
 			return true;
@@ -795,14 +803,6 @@ function checkLevel(flight, traffic, traffic_flas) {
 	} 
 
 	if (flas[traffic_dir[traffic_flas]].includes(flight.fl)){
-		if (flight.fl_light === "bg-warning"){
-			return true;
-		}
-		fatal[fix].push(flight.acid + " level incorrect");
-		return false;
-	} 
-
-	if (fix === "EPKAL" && fix === "DOSUT" && !flas[traffic_dir[traffic_flas]].includes(flight.fl)){
 		if (flight.fl_light === "bg-warning"){
 			return true;
 		}
