@@ -192,7 +192,7 @@ function genFlight(fix, inout, time) {
 
 			dep = random(["ZGGG"]);
 
-			fl = randomP({ "S0890": 0.15, "S0950": 0.15, "S1010": 0.15, "S1070": 0.15, "S1100": 0.05, "S1130": 0.1, "S1190": 0.1, "S1250": 0.5 });
+			fl = randomP({ "S0890": 0.15, "S0950": 0.25, "S1010": 0.15, "S1070": 0.15, "S1100": 0.05, "S1130": 0.2, "S1190": 0.2, "S1250": 0.1 });
 
 			rte = ext_rte[dest] === undefined ? "" : ext_rte[dest];
 			break;
@@ -283,7 +283,7 @@ function genFlight(fix, inout, time) {
 				} else if (dest === "ZJSY"){
 					fl = randomP({ "S0780": 0.05, "S0810": 0.15, "S0840": 0.4, "S0890": 0.15, "S0920": 0.05, "S0980": 0.1, "S1040": 0.1 });
 				} else {
-					fl = randomP({ "S0840": 0.05, "S0920": 0.2, "S0950": 0.05, "S0980": 0.15, "S1040": 0.15, "S1100": 0.15, "S1160": 0.15, "S1220": 0.1 });
+					fl = randomP({ "S0840": 0.05, "S0920": 0.1, "S0950": 0.1, "S0980": 0.15, "S1040": 0.2, "S1100": 0.15, "S1160": 0.15, "S1220": 0.1 });
 				}
 				rte = ext_rte[dest] === undefined ? "" : ext_rte[dest];
 			}
@@ -1001,7 +1001,7 @@ function checkAnswer() {
 					}
 					break;
 				case "SIKOU":
-					if (flight.dest === "ZJHK" || flight.dest === "ZJZJ") {
+					if (flight.dest === "ZJHK" || flight.dest === "ZGZJ") {
 						checkLevel(flight, "SI_out_ZJHKZGZJ", "SIKOU_out");
 					} else if (flight.dest === "ZJQH") {
 						checkLevel(flight, "SI_out_ZJQH", "SIKOU_out");
