@@ -144,10 +144,6 @@ function random(items) {
 	return items[Math.floor(Math.random() * items.length)];
 }
 
-
-
-
-
 function genFlight(fix, inout, time) {
 	rte=""
 	switch (fix) {
@@ -1125,25 +1121,34 @@ function getOS() {
 
 function showDOF(from, to) {
 	// 							
-	if (getOS() === "Mac OS" || getOS() === "Android"){
-		w = "←";
-		n = "↑";
-		e = "→";
-		s = "↓";
-		nw = "↖";
-		ne = "↗";
-		se = "↘";
-		sw = "↙";
-	} else {
-		w = "🡸";
-		n = "🡹";
-		e = "🡺";
-		s = "🡻";
-		nw = "🡼";
-		ne = "🡽";
-		se = "🡾";
-		sw = "🡿";
-	}
+	// if (getOS() === "Mac OS" || getOS() === "Android"){
+	// 	w = "←";
+	// 	n = "↑";
+	// 	e = "→";
+	// 	s = "↓";
+	// 	nw = "↖";
+	// 	ne = "↗";
+	// 	se = "↘";
+	// 	sw = "↙";
+	// } else {
+	// 	w = "🡸";
+	// 	n = "🡹";
+	// 	e = "🡺";
+	// 	s = "🡻";
+	// 	nw = "🡼";
+	// 	ne = "🡽";
+	// 	se = "🡾";
+	// 	sw = "🡿";
+	// }
+
+	w = "←";
+	n = "↑";
+	e = "→";
+	s = "↓";
+	nw = "↖";
+	ne = "↗";
+	se = "↘";
+	sw = "↙";
 	
 	switch (from) {
 		case "SIERA":
