@@ -805,6 +805,14 @@ function checkLevel(flight, traffic, traffic_flas) {
 		return false;
 	} 
 
+	if (fix === "EPKAL" && fix === "DOSUT" && !flas[traffic_dir[traffic_flas]].includes(flight.fl)){
+		if (flight.fl_light === "bg-warning"){
+			return true;
+		}
+		fatal[fix].push(flight.acid + " level incorrect");
+		return false;
+	} 
+
 	if (flight.fl_light === "bg-danger"){
 		return true;
 	} 
