@@ -871,13 +871,13 @@ function checkSeparation(flight1, flight2) {
 	sep = 0;
 	ensure = "";
 
+	// 50NM
+	// flight1.fix_est >= 120 && flight1.fix_est <= 720 && 
+	// flight2.fix_est >= 120 && flight2.fix_est <= 720 && 
 	required.forEach(s => {
 		if (fix === "DOSUT" || fix === "EPKAL"){
 			if (s === "50NM"){
-				if (flight1.fix_est >= 120 && flight1.fix_est <= 720 && 
-					flight2.fix_est >= 120 && flight2.fix_est <= 720 && 
-					Number(flight1.fl) >= 290 &&
-					!flight1.f18.includes("D") && !flight2.f18.includes("D")){
+				if (!flight1.f18.includes("D") && !flight2.f18.includes("D")){
 						return;
 					}
 				if ((flight1.f18+flight2.f18).includes("D") &&
