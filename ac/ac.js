@@ -786,7 +786,7 @@ function checkLevel(flight, traffic, traffic_flas) {
 	if (!(fix in fatal)) 
 		fatal[fix] = [];
 
-	if (fix === "EPKAL" && fix === "DOSUT" && !flas[traffic_dir[traffic_flas]].includes(flight.fl)){
+	if ((fix === "EPKAL" || fix === "DOSUT") && !flas[traffic_dir[traffic_flas]].includes(flight.fl)){
 		if (flight.fl_light === "bg-warning"){
 			return true;
 		}
