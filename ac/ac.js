@@ -375,7 +375,7 @@ function resetRules(){
 			"SI_in_ovf": ["S1010", "S1070", "S1130", "S1190", "S1250"],
 			"SI_in_ZJSY": ["S0810", "S0890"],
 			"SI_in_ZJHKZGZJ": ["S0570"],
-			"SI_A202": ["S1040", "S1160", "S120"],
+			"SI_A202": ["S1040", "S1160", "S1220"],
 			"SI_R339": ["S0980", "S1040", "S1100", "S1160", "S1220"],
 			"SI_out_ZJSY": ["S0840"],
 			"SI_out_ZGBHZGNN": ["S0720", "S0780"],
@@ -517,14 +517,6 @@ function generateFlow(){
 
 			separation.push({flow: true, both: true, dep: "", dep_not: "", dest: "", dest_not: "", in_fix: "TAMOT", out_fix: "NOMAN", ext_rte: "", sep: nnsn_sep});
 			separation.push({flow: true, both: true, dep: "", dep_not: "", dest: "", dest_not: "", in_fix: "TAMOT", out_fix: "SABNO", ext_rte: "", sep: nnsn_sep});
-		}
-
-		if (Math.random() >= 0.3) {
-			ek_sep = (Math.floor(Math.random() * 10) + 10).toString();
-			
-			flow.push({text: "SIERA - EPKAL L642", sep: ek_sep, cfs: "", validity:"UFN", remarks: "", active: true});
-
-			separation.push({flow: true, both: true, dep: "ZGSZ", dep_not: "", dest: "", dest_not: "", in_fix: "TAMOT", out_fix: "EPKAL", ext_rte: "", sep: ek_sep});
 		}
 	}
 }
