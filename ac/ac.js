@@ -530,11 +530,13 @@ function genFlightTime(fix, inout, initTime, timediff, num) {
 }
 
 function checkTransferred(flight) {
-	if (flight.in_fix === "TAMOT" && flight.fix_est <= cTime + 7) {
-		return true;
-	} else if (flight.in_fix === "BEKOL" && flight.fix_est <= cTime + 15) {
-		return true;
-	} else return flight.fix_est <= cTime + 12;
+	if (flight.in_fix === "TAMOT") {
+		return flight.fix_est <= cTime + 7;
+	} else if (flight.in_fix === "BEKOL") {
+		return flight.fix_est <= cTime + 15;
+	} else {
+		return flight.fix_est <= cTime + 12;
+	}
 }
 
 function showActiveFlight() {
@@ -774,19 +776,19 @@ function checkLevel(flight, traffic, traffic_flas) {
 	if (!(fix in fatal)) 
 		fatal[fix] = [];
 
-	if ((fix === "EPKAL" || fix === "DOSUT") && !flas[traffic_dir[traffic_flas]].includes(flight.fl)){
-		if (flight.fl_light === "bg-warning"){
-			return true;
-		}
-		fatal[fix].push(flight.acid + " level incorrect");
-		return false;
-	} 
+	// if ((fix === "EPKAL" || fix === "DOSUT") && !flas[traffic_dir[traffic_flas]].includes(flight.fl)){
+	// 	if (flight.fl_light === "bg-warning"){
+	// 		return true;
+	// 	}
+	// 	fatal[fix].push(flight.acid + " level incorrect");
+	// 	return false;
+	// } 
 
 	if (level[traffic].includes(flight.fl)){
 		if (flight.fl_light === ""){
 			return true;
 		}
-		fatal[fix].push(flight.acid + " level incorrect2");
+		fatal[fix].push(flight.acid + " level incorrect");
 		return false;
 	} 
 
@@ -796,7 +798,13 @@ function checkLevel(flight, traffic, traffic_flas) {
 		}
 		fatal[fix].push(flight.acid + " level incorrect");
 		return false;
-	} 
+	} else if (fix === "EPKAL" || fix === "DOSUT") {
+		if (flight.fl_light === "bg-warning"){
+			return true;
+		}
+		fatal[fix].push(flight.acid + " level incorrect");
+		return false;
+	}
 
 	if (flight.fl_light === "bg-danger"){
 		return true;
