@@ -367,6 +367,7 @@ function resetRules(){
 			"IK_defi": ["270"],
 			"IK_out": ["280", "300", "340", "380", "400", "430"],
 			"IK_out_defi": ["280"],
+			"IK_out_VVDN": ["280", "300"],
 			"SI_in": ["S1010", "S1070", "S1130", "S1190"],
 			"SI_in_ovf": ["S1010", "S1070", "S1130", "S1190", "S1250"],
 			"SI_in_ZJSY": ["S0810", "S0890"],
@@ -997,6 +998,8 @@ function checkAnswer() {
 				case "IKELA":
 					if (flight.f18 !== ""){
 						checkLevel(flight, "IK_out_defi", "IKELA_out");
+					} else if (flight.dest === "VVDN") {
+						checkLevel(flight, "IK_out_VVDN", "IKELA_out");
 					} else {
 						checkLevel(flight, "IK_out", "IKELA_out");
 					}
