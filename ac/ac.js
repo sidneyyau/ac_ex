@@ -215,7 +215,7 @@ function genFlight(fix, inout, time) {
 		case "EPKAL":
 			out_fix = "EPKAL";
 			dest = random(dest_list[out_fix]);
-			dep = random(["ZGGG"]);
+			dep = randomP({"VHHH": 0.15, "": 0.85});
 
 			fl = randomP({ "310": 0.25, "320": 0.25, "340": 0.1, "350": 0.1, "360": 0.1, "390": 0.1, "400": 0.1 });
 			break;
@@ -223,9 +223,9 @@ function genFlight(fix, inout, time) {
 		case "IKELA":
 			if (inout === "in"){
 				if (time <= 14 || time >= 975){
-					out_fix = randomP({ "": 0.2, "DOTMI": 0.3, "ENVAR": 0.35, "KAPLI": 0.00, "BEKOL": 0.1, "LANDA": 0.05 });
+					out_fix = randomP({ "": 0.3, "DOTMI": 0.3, "ENVAR": 0.25, "KAPLI": 0.00, "BEKOL": 0.1, "LANDA": 0.05 });
 				} else {
-					out_fix = randomP({ "": 0.2, "DOTMI": 0.3, "ENVAR": 0.00, "KAPLI": 0.35, "BEKOL": 0.1, "LANDA": 0.05 });
+					out_fix = randomP({ "": 0.3, "DOTMI": 0.3, "ENVAR": 0.00, "KAPLI": 0.25, "BEKOL": 0.1, "LANDA": 0.05 });
 				}
 				if (out_fix === "") {
 					dest = random(["VHHH", "VMMC"]);
@@ -238,9 +238,10 @@ function genFlight(fix, inout, time) {
 				fl = randomP({ "290": 0.2, "330": 0.2, "370": 0.2, "410": 0.2, "350": 0.05, "390": 0.1, "270": 0.05 });
 			} else {
 				out_fix = "IKELA"
+				dep = randomP({"VHHH": 0.15, "": 0.85});
 				dest = random(dest_list[out_fix]);
 				if (dest === "VVDN") {
-					fl = randomP({ "300": 0.5, "340": 0.5});
+					fl = randomP({ "280": 0.35, "300": 0.35, "340": 0.13, "360": 0.04, "380": 0.13 });
 				} else {
 					fl = randomP({ "280": 0.1, "300": 0.2, "330": 0.1, "340": 0.3, "360": 0.1, "380": 0.1, "400": 0.1 });
 				}
@@ -267,6 +268,7 @@ function genFlight(fix, inout, time) {
 				}
 			} else {
 				out_fix = "SIKOU";
+				dep = randomP({"VHHH": 0.15, "": 0.85});
 				dest = random(dest_list[out_fix]);
 
 				if (dest === "ZGZJ" || dest === "ZJHK"){
@@ -573,15 +575,15 @@ function startExercise() {
 
 		drawBoard("SIERA");
 	} else if (exer === "wa"){
-		genFlightTime("ASOBA", "in", cTime, 10, 2);
-		genFlightTime("DOSUT", "in", cTime, 3, 7);
-		genFlightTime("TAMOT", "in", cTime, 3, 7);
-		genFlightTime("IKELA", "in", cTime, 3, 10);
-		genFlightTime("SIKOU", "in", cTime, 3, 10);
-		genFlightTime("EPKAL", "out", cTime+5, 3, 5);
-		genFlightTime("BEKOL", "out", cTime+5, 3, 5);
-		genFlightTime("IKELA", "out", cTime+5, 3, 5);
-		genFlightTime("SIKOU", "out", cTime+5, 3, 5);
+		genFlightTime("ASOBA", "in", cTime, 10, 4);
+		genFlightTime("DOSUT", "in", cTime, 3, 12);
+		genFlightTime("TAMOT", "in", cTime, 3, 12);
+		genFlightTime("IKELA", "in", cTime, 3, 16);
+		genFlightTime("SIKOU", "in", cTime, 3, 16);
+		genFlightTime("EPKAL", "out", cTime+5, 3, 8);
+		genFlightTime("BEKOL", "out", cTime+5, 3, 8);
+		genFlightTime("IKELA", "out", cTime+5, 3, 8);
+		genFlightTime("SIKOU", "out", cTime+5, 3, 8);
 
 		let outflight = active_flights.length;
 
@@ -1249,7 +1251,7 @@ function showSpeed(fix, speed){
 
 
 function drawCloak(fix, flight, efs) {
-	efs_html = `<div class="row">`;
+	efs_html = `<div class="row flight-strip-row">`;
 	if (flight.cloak === "") {
 		efs_html += `<div class="col-1" onclick="cloak('${flight.acid}', 'L', '${fix}')"></div>`;
 	} else if (flight.cloak === "R") {
@@ -1402,6 +1404,41 @@ function drawOVF_IN(fix, flight) {
 
 }
 
+function drawOB(fix, flight) {
+	efs_html = `
+		<div class="col-10">
+			<div class="card border-3 rounded-0" style="border-color: yellow;">
+				<div class="card-body">
+					<div class="container">
+						<div class="row">
+							<div class="col-3 border border-black fs-5 ${flight.checked}" onclick="clickACID('${flight.acid}')">${flight.acid}</div>
+							<div class="col-2 border border-black fs-5 bg-opacity-50 ${checkTransferred(flight)?"green-EFS":"salmon-EFS"} ${flight.fl_light}" onclick="lightup('${flight.acid}', '${fix}')" oncontextmenu="flip('${flight.acid}', '${fix}');return false;" style="overflow: hidden; text-overflow: ellipsis;white-space: nowrap;">${showLvl(flight.fl)===flight.fl?flight.fl:"F"+showLvl(flight.fl)+"/"+flight.fl}</div>
+							<div class="col-2 border border-black">${flight.out_fix}</div>
+							<div class="col-2 border border-black text-start"></div>
+							<div class="col-1 border border-black"></div>
+							<div class="col-1 border border-black">${flight.ext_rte}</div>
+							<div class="col-1 border border-black">${showDOF(flight.in_fix, flight.out_fix)}</div>
+						</div>
+						<div class="row">
+							<div class="col-1 border border-black">${flight.acft}</div>
+							<div class="col-1 border border-black"></div>
+							<div class="col-1 border border-black">${flight.ssr}</div>
+							<div class="col-2 border border-black">${flight.rvsm}</div>
+							<div class="col-2 border border-black ${checkTransferred(flight)?"green-EFS":"salmon-EFS"}">${showTime(flight.fix_est)}</div>
+							<div class="col-2 border border-black text-start">${showSpeed(fix,flight.speed)}${flight.rbox}</div>
+							<div class="col-1 border border-black">${flight.f18}</div>
+							<div class="col-1 border border-black">${flight.dest}</div>
+							<div class="col-1 border border-black" onclick="openRbox('${flight.acid}')">R</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		`;
+	return drawCloak(fix, flight, efs_html);
+
+}
+
 function drawOVF_OUT(fix, flight) {
 	efs_html = `
 		<div class="col-10">
@@ -1466,6 +1503,8 @@ function drawBoard(fix) {
 		while (i < flight_draw.length) {
 			if (flight_draw[i].dest === "VHHH" || flight_draw[i].dest === "VMMC") {
 				efs_html += drawIB(fix, flight_draw[i]);
+			} else if (flight_draw[i].dep === "VHHH") {
+				efs_html += drawOB(fix, flight_draw[i]);
 			} else if (flight_draw[i].in_fix !== flight_draw[i].out_fix) {
 				efs_html += drawOVF_IN(fix, flight_draw[i]);
 			} else {
