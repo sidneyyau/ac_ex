@@ -185,7 +185,7 @@ function genFlight(fix, inout, time) {
 
 			dep = random(["ZGGG"]);
 
-			fl = randomP({ "S0890": 0.15, "S0950": 0.25, "S1010": 0.15, "S1070": 0.15, "S1100": 0.05, "S1130": 0.2, "S1190": 0.2, "S1250": 0.1 });
+			fl = randomP({ "S0890": 0.2, "S0950": 0.25, "S1010": 0.15, "S1070": 0.2, "S1100": 0.05, "S1130": 0.2, "S1190": 0.2, "S1250": 0.05 });
 
 			rte = ext_rte[dest] === undefined ? "" : ext_rte[dest];
 			break;
