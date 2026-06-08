@@ -576,14 +576,14 @@ function startExercise() {
 		drawBoard("SIERA");
 	} else if (exer === "wa"){
 		genFlightTime("ASOBA", "in", cTime, 10, 4);
-		genFlightTime("DOSUT", "in", cTime, 3, 12);
-		genFlightTime("TAMOT", "in", cTime, 3, 12);
-		genFlightTime("IKELA", "in", cTime, 3, 16);
-		genFlightTime("SIKOU", "in", cTime, 3, 16);
-		genFlightTime("EPKAL", "out", cTime+5, 3, 8);
-		genFlightTime("BEKOL", "out", cTime+5, 3, 8);
-		genFlightTime("IKELA", "out", cTime+5, 3, 8);
-		genFlightTime("SIKOU", "out", cTime+5, 3, 8);
+		genFlightTime("DOSUT", "in", cTime, 3, 8);
+		genFlightTime("TAMOT", "in", cTime, 3, 8);
+		genFlightTime("IKELA", "in", cTime, 3, 10);
+		genFlightTime("SIKOU", "in", cTime, 3, 10);
+		genFlightTime("EPKAL", "out", cTime+5, 3, 6);
+		genFlightTime("BEKOL", "out", cTime+5, 3, 6);
+		genFlightTime("IKELA", "out", cTime+5, 3, 6);
+		genFlightTime("SIKOU", "out", cTime+5, 3, 6);
 
 		let outflight = active_flights.length;
 
